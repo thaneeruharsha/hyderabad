@@ -1,0 +1,52 @@
+March 28th 2016 : 	
+ANT Tutorials :	
+http://www.tutorialspoint.com/ant/index.htm	
+
+	Install : Workspace Cleanup Plugin 
+			  Timestamper
+	
+Sample Jenkins ANT Build :
+	Repository URL 		: 	https://github.com/masanobuimai/ant-sample-project.git
+	Branches to build	: */master
+	
+Build Step :	
+	Execute Shell :
+--------------------------------------------------------
+set +x
+echo ${JOB_NAME}
+set +x
+echo ${ITEM_FULLNAME}
+set +x
+echo "JENKINS WORKSPACE="${WORKSPACE}
+set +x
+
+set +x
+echo "==================== CONTENT OF THIS PROJECT FROM GIT COPIED TO JENKINS WORKSPACE ============================="
+ls -lRt ${WORKSPACE}
+set +x
+##======================== CHANGING PERMISSIONS BEFORE THE BUILD ====================================================="
+find ${WORKSPACE} -type d -exec chmod -R 755 {} ";"
+find ${WORKSPACE} -type f -exec chmod -R 754 {} ";"
+set +x
+
+set +x
+echo "======================== PERFORMING THE ANT BUILD BUILD ====================================================="
+set +x	
+--------------------------------------------------------
+
+Build Step :
+	Invoke ANT 
+		Select ANT Version ;
+		Build File : ${WORKSPACE}/build-jenkins.xml
+		
+--------------------  GIT COMMANDS --------------------------------
+echo "# Test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/kishorevenkat/Test.git
+git push -u origin master
+
+git remote add origin https://github.com/kishorevenkat/Test.git
+git push -u origin master
+-------------------------------------------------------------------		
